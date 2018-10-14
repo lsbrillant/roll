@@ -1,0 +1,18 @@
+roll := expr
+value := die | number
+expr := value (op expr)* | '(' expr ')' 
+op := '+' | '-'
+die := [ number ] 'd' number
+number := digit+
+digit := '0'...'9'
+
+
+
+
+# Examples
+#
+# 1d4
+# 1d4 + 1
+# d20
+# d5 + 3d2
+# 1d4 + (1d2 - 1)
