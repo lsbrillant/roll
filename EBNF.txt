@@ -1,6 +1,6 @@
 roll := expr
 value := die | number
-expr := value (op expr)* | '(' expr ')' 
+expr := expr (op expr)+ | '(' expr ')' | value 
 op := '+' | '-'
 die := [ number ] 'd' number
 number := digit+

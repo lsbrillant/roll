@@ -1,5 +1,5 @@
-#[derive(Debug, Clone)]
-enum Token {
+#[derive(Debug, Clone, PartialEq)]
+pub enum Token {
     Number(i32),
     D,
     AddOp,
@@ -64,5 +64,25 @@ fn scan_number<T: Iterator<Item = char>>(it: &mut T) -> Result<i32, RollError>
     {
         Ok(n) => Ok(n),
         Err(err) => Err(format!("{}", err)),
+    }
+}
+
+
+#[cfg(test)]
+mod test {
+    use super::scan;
+    use super::Token::*;
+    
+    #[test]
+    fn test_simple_scan() {
+        let line = "1d4 + 1".to_string();
+        let expected = vec![Number(1), D, Number(4), AddOp, Number(1)];
+        if let Ok(result) = scan(&line) {
+            for (i, item) in expected.iter().enumerate() {
+                assert!(result[i] == *item);
+            }
+        } else {
+            assert!(false);
+        }
     }
 }

@@ -7,17 +7,20 @@ pub fn parse(s: &String) => Result<Expr, RollError> {
 }
 
 fn parse_expr<T: Iterator<Item = Token>>(it:&mut T) -> Result<Expr, RollError> {
-    match it.next() {
-        OpenParren => {
-            let expr = parse_expr(it)?;
-            if let Some(tok) = it.next(); tok != CloseParren {
-                return Err("unmatched parrenthesis")
-            }
-            Grouping(Box::new(expr))
-        },
-        Number(n) => {
-              
-        } 
-        _ => Err(format!("Expecting expr, found {:?}", _))
-    }
+    loop {
+        match it.next() {
+            OpenParren => {
+                let expr = parse_expr(it)?;
+                if let Some(tok) = it.next(); tok != CloseParren {
+                    return Err("unmatched parrenthesis")
+                }
+                Grouping(Box::new(expr))
+            },
+            Number(n) => {
+                parse_value()?         
+            } 
+            _ => Err(format!("Expecting expr, found {:?}", _))
+        }
+        if     
+    } 
 }

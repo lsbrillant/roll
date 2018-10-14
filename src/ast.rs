@@ -13,7 +13,7 @@ pub enum Expr {
 #[derive(Debug, Clone)]
 pub enum Value {
     // first value is how many, second is the number of sides
-    Die(i32, i32),
+    Dice(i32, i32),
     // just a regular number
     Number(i32)
 }
@@ -26,7 +26,7 @@ impl Eval for Value {
     fn eval(&self) -> i32 {
         use self::Value::*;
         match self {
-            Die(num, sides) => {
+            Dice(num, sides) => {
                 use ast::rand::distributions::{Distribution, Uniform};
                 let between = Uniform::new(1, *sides);
                 let mut rng = rand::thread_rng();
@@ -78,7 +78,7 @@ mod test {
     }
     #[test]
     fn test_simple_rand() {
-        let ast = Literal(Box::new(Die(1,4)));
+        let ast = Literal(Box::new(Dice(1,4)));
         let val = ast.eval(); 
         assert!(val > 0 && val <= 4);
     }
