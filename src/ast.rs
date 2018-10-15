@@ -28,7 +28,7 @@ impl Eval for Value {
         match self {
             Dice(num, sides) => {
                 use ast::rand::distributions::{Distribution, Uniform};
-                let between = Uniform::new(1, *sides);
+                let between = Uniform::new(1, *sides+1);
                 let mut rng = rand::thread_rng();
                 let mut sum = 0;
                 for _ in 0..*num {
