@@ -1,16 +1,16 @@
 extern crate rand;
 
-#[derive(Debug, Clone)]
+#[derive(Debug, Clone, PartialEq)]
 pub enum Op {
     Add, Sub
 }
-#[derive(Debug, Clone)]
+#[derive(Debug, Clone, PartialEq)]
 pub enum Expr {
     Literal(Box<Value>),
     Grouping(Box<Expr>),
     Binary(Box<Expr>, Op, Box<Expr>),
 }
-#[derive(Debug, Clone)]
+#[derive(Debug, Clone, PartialEq)]
 pub enum Value {
     // first value is how many, second is the number of sides
     Dice(i32, i32),
